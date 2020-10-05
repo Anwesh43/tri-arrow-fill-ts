@@ -205,3 +205,25 @@ class TriArrowFill {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+    
+    taf : TriArrowFill = new TriArrowFill()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.taf.draw(context)    
+    }
+
+    handleTap(cb : Function) {
+        this.taf.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.taf.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
