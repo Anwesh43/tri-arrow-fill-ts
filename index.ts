@@ -20,7 +20,7 @@ class ScaleUtil {
     }
 
     static divideScale(scale : number, i : number, n : number) : number {
-        return Math.min(1 / n, ScaleUtil.divideScale(scale, i, n)) * n 
+        return Math.min(1 / n, ScaleUtil.maxScale(scale, i, n)) * n 
     }
 
     static sinify(scale : number) : number {
@@ -52,7 +52,7 @@ class DrawingUtil {
         const sf3 : number = ScaleUtil.divideScale(sf, 2, parts)
         context.save()
         DrawingUtil.drawLine(context, 0, 0, w * 0.5 * sf1, h * sf1)
-        DrawingUtil.drawLine(context, w / 2, h, w / 2 - w * 0.5 * sf2, h * (1 - sf2))
+        DrawingUtil.drawLine(context, w / 2, h, w / 2 + w * 0.5 * sf2, h * (1 - sf2))
         DrawingUtil.drawTriFill(context, sf3)
         context.restore()
     }
